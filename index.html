@@ -1,0 +1,131 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <title>LCM Parser</title>
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1,shrink-to-fit=no">
+
+	<link rel="shortcut icon" href="img/favicon/favicon.ico">
+	<link rel="apple-touch-icon" href="img/favicon/apple-touch-icon.png">
+	
+	<!-- <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700&subset=cyrillic" rel="stylesheet"> -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=cyrillic" rel="stylesheet">
+    <!-- Place favicon.ico in the root directory -->
+    <link rel="stylesheet" href="css/foundation.css">
+    <link rel="stylesheet" href="css/foundation-icons.css">
+    <link rel="stylesheet" href="css/app2.css">
+</head>
+<body>
+<div class="row core">
+	<div class="columns large-6 medium-6 left-block">
+		<ul id="tabs">
+			<li><a href="#source" class="active">Source Data</a></li>
+			<li><a href="#isolated">Isolated Data</a></li>
+		</ul>
+		<div id="source" class="row tab-content active">
+			<div class="columns large-6 medium-6">
+				<header>
+					<h5>
+						<!-- <i class="fi-page-copy"></i>  -->
+						Source Data
+					</h5>
+				</header>
+				<textarea class="flex-grow" name="everything" id="everything" rows="8" placeholder="Put everything here, separating blocks with empty line" title="Put everything here, separating blocks with empty line"></textarea>
+				<footer>
+					<a href="#" id="exporteverything" download="sourcedata.txt" class="button hollow">Export</a>
+					<div class="input-group">
+						<input class="input-group-field" type="text" value="sourcedata" id="exporteverythingfile">
+						<span class="input-group-label">.txt</span>
+					</div>
+				</footer>
+			</div>
+			<div class="columns large-6 medium-6">
+				<header>
+					<h5>
+						<!-- <i class="fi-folder"></i>  -->
+						Clusters
+					</h5> 
+				</header>
+				<textarea class="flex-grow" name="clusters" id="clusters" rows="8" placeholder="Use | or / to split two interchangeable clusters" title="Use | or / to split two interchangeable clusters"></textarea>
+				<footer>
+					<a href="#" id="exportclusters" download="clusters.txt" class="button hollow">Export</a>
+					<div class="input-group">
+						<input class="input-group-field" type="text" value="clusters" id="exportclustersfile">
+						<span class="input-group-label">.txt</span>
+					</div>
+				</footer>
+			</div>
+		</div>
+		<div id="isolated" class="row tab-content">
+			<div class="columns large-6 medium-6">
+				<div id="blocks" class="hide">
+					<h5><a href="#"><i class="fi-list-bullet"></i> Blocks</a></h5>
+					<div id="block-links"></div>
+				</div>
+			</div>
+			<div class="columns large-6 medium-6">
+				<header>
+					<h5><i class="fi-page"></i> Isolated Data</h5> 
+					<a href="#" id="exportlocal" download="isolateddata.txt" class="button hollow">Export</a>
+					<div class="input-group">
+						<input class="input-group-field" type="text" value="isolateddata" id="exportlocalfile">
+						<span class="input-group-label">.txt</span>
+					</div>
+				</header>
+				<textarea class="flex-grow" name="input" id="input" rows="8"></textarea>
+				<p><input type="checkbox" id="uselocalmess"><label for="uselocalmess">Use local mess only</label></p>
+			</div>
+		</div>
+	</div>
+
+	<div class="columns large-6 medium-6">
+		<div id="charts" class="">
+			<a href="#" id="savegraph" download="graph.png" class="button hollow">Download</a>
+			<div class="input-group">
+				<input class="input-group-field" type="text" value="graph" id="graphfile">
+				<span class="input-group-label">.png</span>
+			</div>
+			<div class="canvas-wrap">
+				<div id="canvas">
+					<!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M501.8 408.01h-19.325V118.07c0-5.63-4.566-10.198-10.2-10.198h-63.48c-5.632 0-10.198 4.567-10.198 10.2v289.937h-26.503V146.686c0-5.632-4.566-10.2-10.2-10.2h-63.48c-5.632 0-10.198 4.568-10.198 10.2v261.32h-26.503v-311.4c0-5.632-4.566-10.2-10.2-10.2h-63.48c-5.632 0-10.198 4.568-10.198 10.2v311.4h-26.503v-226.57c0-5.632-4.566-10.2-10.2-10.2h-63.48c-5.632 0-10.198 4.568-10.198 10.2v226.57H40.84V93.792c0-5.63-4.566-10.198-10.2-10.198s-10.198 4.567-10.198 10.2v13.056H10.2c-5.634 0-10.2 4.568-10.2 10.2s4.566 10.2 10.2 10.2h10.24v24.57H10.2c-5.634 0-10.2 4.568-10.2 10.2s4.566 10.2 10.2 10.2h10.24v24.57H10.2c-5.634 0-10.2 4.568-10.2 10.2s4.566 10.2 10.2 10.2h10.24v24.57H10.2c-5.634 0-10.2 4.568-10.2 10.2s4.566 10.2 10.2 10.2h10.24v24.57H10.2c-5.634 0-10.2 4.568-10.2 10.2s4.566 10.2 10.2 10.2h10.24v24.57H10.2c-5.634 0-10.2 4.568-10.2 10.2s4.566 10.2 10.2 10.2h10.24v24.57H10.2c-5.634 0-10.2 4.567-10.2 10.2s4.566 10.198 10.2 10.198h10.24v21.142c0 5.632 4.567 10.2 10.2 10.2H501.8c5.633 0 10.2-4.568 10.2-10.2s-4.566-10.2-10.2-10.2zm-370.866-.002h-43.08v-170.38h43.08v170.38zm0-190.78h-43.08v-25.592h43.08v25.593zm110.38 190.78h-43.08v-213.11h43.08v213.11zm0-233.51h-43.08v-67.69h43.08v67.69zm110.38 233.51h-43.08V275.443h43.08v132.565zm0-152.963h-43.08v-98.158h43.08v98.158zm110.382 152.963h-43.08V225.363h43.08v182.645zm0-203.043h-43.08V128.27h43.08v76.695z" fill="#eaeaea" /></svg> -->
+				</div>
+			</div>		
+		</div>
+	</div>
+
+</div>
+
+<div class="footer">
+	<div class="progressbar">
+		<div class="bar"><i class="fi-clock"></i> 0% Complete</div>
+	</div>
+	<div class="row">
+		<div class="columns large-12 medium-12 small-12 main-buttons">
+			<a href="#" id="go" class="button"><i class="fi-refresh"></i> Process</a> 
+			<!-- <a href="#" id="download" download="stuff.csv" class="button success">Download .csv</a> -->
+			<a href="#" id="download" download="stuff.csv" class="button success fadein"><i class="fi-arrow-left"></i> Process first</a>
+			
+			<div class="input-group">
+				<input class="input-group-field" type="text" value="stuff" id="downloadfile">
+				<span class="input-group-label">.csv</span>
+			</div>
+
+			<!-- <a href="#" id="maketable" class="button hollow"><i class="fi-list"></i> Generate table (experimental)</a>  -->
+			
+			<!-- <button type="button" class="button secondary hollow options" data-toggle="offCanvas"><i class="fi-widget"></i> Options</button> -->
+			<button type="button" class="button hollow load-samples">Load Demo Samples</button>
+		</div>
+	</div>
+</div>
+
+<script src="js/vendor/jquery.js"></script>
+<script src="js/vendor/what-input.js"></script>
+<script src="js/vendor/foundation.js"></script>
+<script src="js/vendor/chart.min.js"></script>
+<script src="js/app.js"></script>  
+<script src="js/scripts2.min.js"></script>
+<!-- Created with ♥ by Pavel Burov -->
+</body>
+</html>
